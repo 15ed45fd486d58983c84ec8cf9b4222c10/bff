@@ -1,4 +1,4 @@
-FROM node:18-bullseye-slim AS build
+FROM node:18-alpine AS build
 
 RUN mkdir /app
 WORKDIR /app
@@ -12,7 +12,7 @@ RUN pnpm run build
 RUN pnpm prune --prod
 WORKDIR /app/build
 
-FROM node:18-bullseye-slim as prod
+FROM node:18-alpine as prod
 
 COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist/ /app/dist/
