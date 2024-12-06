@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Accident {
+  id          String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  type        AccidentTypeEnum // Enum type for incident types
+  title       String
+  description String
+  address     String
+  location    Json? @db.JsonB// latitude and longitude stored as JSON if present
+  severity    Int // Criticality level, e.g., from 1 to 10
+  timestamp   DateTime @default(now()) @db.Timestamp() // Date and time in ISO format
+  status      AccidentStatusEnum // Status of the incident
+  imageUrl    String? // Optional URL for the image
+}
+
+// Enum to define possible types of incidents
+enum AccidentTypeEnum {
+  Accident
+  RoadRepair
+  MassEvent
+  VehicleAnomaly
+  CitizenRequest
+  SignalFailure
+  Other
+}
+
+// Enum for the status of the incident
+enum AccidentStatusEnum {
+  active
+  resolved
+  pending
+}
