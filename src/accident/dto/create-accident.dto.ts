@@ -1,21 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional, IsInt, IsLatitude, IsLongitude, Min, Max, IsUrl, IsDateString, IsObject, IsDate, IsNumber } from 'class-validator';
+import { IsString, IsEnum, IsOptional, IsInt, Min, Max, IsUrl, IsDate } from 'class-validator';
 import { $Enums } from '@prisma/client';
 import { Type } from 'class-transformer';
-
-class Location {
-    @ApiProperty()
-    @IsNumber()
-    latitude: number;
-
-    @ApiProperty()
-    @IsNumber()
-    longitude: number;
-}
+import { Location } from 'src/shared/dto/location.dto';
 
 export class CreateAccidentDto {
     @ApiProperty({
         description: 'Type of the incident',
+        enumName: 'AccidentTypeEnum',
         enum: $Enums.AccidentTypeEnum,
     })
     @IsEnum($Enums.AccidentTypeEnum)
@@ -63,6 +55,7 @@ export class CreateAccidentDto {
 
     @ApiProperty({
         description: 'Status of the incident (active, resolved, pending)',
+        enumName: 'AccidentStatusEnum',
         enum: $Enums.AccidentStatusEnum,
     })
     @IsEnum($Enums.AccidentStatusEnum)
