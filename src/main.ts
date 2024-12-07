@@ -3,14 +3,19 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
 import {ValidationPipe} from "@nestjs/common";
+import { json } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(json({ limit: "20mb" }));
   app.use(cookieParser());
   app.useGlobalPipes(
-      new ValidationPipe({
-        whitelist: true,
-      }),
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+      forbidUnknownValues: true,
+    }),
   );
 
   const config = new DocumentBuilder()
@@ -23,6 +28,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
   await app.listen(3001);
 }
 bootstrap();

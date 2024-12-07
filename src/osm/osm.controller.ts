@@ -8,14 +8,14 @@ import { BoundingBoxDto } from 'src/osm/dto/boundingBox.dto';
 export class OsmController {
   constructor(private readonly osmService: OsmService) {}
 
-  @Post()
+  @Post("/getRoads")
   @ApiOperation({ summary: 'Get roads' })
   @ApiOkResponse()
   async getRoads(@Body() boundingBoxDto: BoundingBoxDto): Promise<any> {
     return this.osmService.getRoads(boundingBoxDto);
   }
 
-  @Post()
+  @Post("/getTrafficSignals")
   @ApiOperation({ summary: 'Get traffic signals' })
   @ApiOkResponse()
   async getTrafficSignals(@Body() boundingBoxDto: BoundingBoxDto): Promise<any> {

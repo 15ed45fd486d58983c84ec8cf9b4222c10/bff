@@ -7,6 +7,7 @@ export class OsmService {
   private readonly OVERPASS_URL = 'https://overpass-api.de/api/interpreter';
 
   public async getRoads(boundingBoxDto: BoundingBoxDto) {
+    console.log(boundingBoxDto);
     const query = `
     [out:json];
     way
@@ -34,7 +35,7 @@ export class OsmService {
         .then((response) => response.data)
     } catch (err) {
       if (isAxiosError(err)) {
-        throw new HttpException("Get OSM data error", err.response.status);
+        throw new HttpException("Get OSM data error", err.response?.status || 500);
       }
     }
   }

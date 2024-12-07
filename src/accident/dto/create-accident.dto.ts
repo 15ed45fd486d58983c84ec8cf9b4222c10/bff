@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsEnum, IsOptional, IsInt, Min, Max, IsUrl, IsDate } from 'class-validator';
+import { IsString, IsEnum, IsOptional, IsInt, Min, Max, IsUrl, IsDate, ValidateNested } from 'class-validator';
 import { $Enums } from '@prisma/client';
 import { Type } from 'class-transformer';
 import { Location } from 'src/shared/dto/location.dto';
@@ -36,6 +36,7 @@ export class CreateAccidentDto {
         type: Location,
     })
     @IsOptional()
+    @ValidateNested()
     @Type(() => Location)
     location?: Location;
 
