@@ -8,6 +8,8 @@ RUN npm i -g pnpm
 RUN pnpm install
 
 COPY . .
+RUN pnpm run prisma:migrate
+RUN pnpm run prisma:generate
 RUN pnpm run build
 RUN pnpm prune --prod
 WORKDIR /app/build

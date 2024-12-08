@@ -9,7 +9,7 @@
     "prisma:init": "prisma init",
     "prisma:migrate": "prisma migrate dev --schema=./src/prisma/schema.prisma",
     "prisma:generate": "prisma generate --schema=./src/prisma/schema.prisma",
-    "build": "pnpm run prisma:generate && nest build",
+    "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
