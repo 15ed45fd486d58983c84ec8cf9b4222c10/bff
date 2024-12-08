@@ -1,7 +1,7 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {CreateAccidentDto} from './dto/create-accident.dto';
 import {UpdateAccidentDto} from './dto/update-accident.dto';
-import {PrismaService} from "src/prisma/prisma.service";
+import {PrismaService} from "prisma/prisma.service";
 import { accidentMapper } from './mapper/accidentMapper';
 import { Accident } from './entities/accident.entity';
 
