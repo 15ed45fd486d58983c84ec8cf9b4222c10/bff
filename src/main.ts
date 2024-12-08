@@ -8,7 +8,12 @@ import { json } from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: "*"
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:4173',
+      'https://front.hack.kvesten.com/',
+    ],
+    credentials: true
   })
   app.use(json({ limit: "20mb" }));
   app.use(cookieParser());
