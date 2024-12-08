@@ -10,15 +10,6 @@ RUN pnpm install
 COPY . .
 RUN pnpm run build
 RUN pnpm prune --prod
-WORKDIR /app/build
-
-FROM node:18-alpine as prod
-
-COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/dist/ /app/dist/
-COPY --from=build /app/prisma /app/prisma
-COPY --from=build /app/package.json /app/package.json
-WORKDIR /app
 
 EXPOSE 3001
 CMD [ "npm", "run", "start:prod" ]
