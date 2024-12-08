@@ -10,7 +10,7 @@
     "prisma:migrate": "prisma migrate dev --schema=./src/prisma/schema.prisma",
     "prisma:migrate:prod": "prisma migrate deploy --schema=./src/prisma/schema.prisma",
     "prisma:generate": "prisma generate --schema=./src/prisma/schema.prisma",
-    "build": "nest build",
+    "build": "pnpm run prisma:generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
